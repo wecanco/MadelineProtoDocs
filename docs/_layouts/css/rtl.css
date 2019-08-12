@@ -34,7 +34,7 @@
 }
 
 
-body {
+html,body {
     font-family: "iransansLight";
     min-height: 100vh;
     direction: rtl;
