@@ -54,7 +54,7 @@ $MadelineProto->loop(function () use ($MadelineProto) {
 });
 ```
 
-[Try this code now!](https://try.madelineproto.xyz) or run this code in a browser or in a console. 
+[همین الان این کد را از اینجا امتحان کن!](https://try.madelineproto.xyz) یا کد بالا را درمرورگر یا کنسول اجرا کنید.
 
 
 نکته: اگر خطایی مشاهده کردید (یا هرچیز دیگری), برای ما خطا را همراه با فایل `MadelineProto.log` (این فایل در پوشه ای که کدتان را اجرا میکنید ساخته می شود البته اگر با مرورگر فایل سورستان را اجرا کرده باشید) [ارسال کنید](https://t.me/pwrtelegramgroup) 
