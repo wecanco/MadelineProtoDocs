@@ -1,0 +1,43 @@
+@font-face {
+    font-family: iransansLight;
+    font-style: normal;
+    font-weight: normal;
+    src: url("../fonts/IRANSansWeb_Light.eot");
+    src: url("../fonts/IRANSansWeb_Light.eot?#iefix")
+            format("embedded-opentype"),
+        url("../fonts/IRANSansWeb_Light.woff2") format("woff2"),
+        url("../fonts/IRANSansWeb_Light.woff") format("woff"),
+        url("../fonts/IRANSansWeb_Light.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: iransansMedium;
+    font-style: normal;
+    font-weight: normal;
+    src: url("../fonts/IRANSansWeb_Medium.eot");
+    src: url("../fonts/IRANSansWeb_Medium.eot?#iefix")
+            format("embedded-opentype"),
+        url("../fonts/IRANSansWeb_Medium.woff2") format("woff2"),
+        url("../fonts/IRANSansWeb_Medium.woff") format("woff"),
+        url("../fonts/IRANSansWeb_Medium.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: iransansBold;
+    font-style: normal;
+    font-weight: normal;
+    src: url("../fonts/IRANSansWeb_Bold.eot");
+    src: url("../fonts/IRANSansWeb_Bold.eot?#iefix") format("embedded-opentype"),
+        url("../fonts/IRANSansWeb_Bold.woff2") format("woff2"),
+        url("../fonts/IRANSansWeb_Bold.woff") format("woff"),
+        url("../fonts/IRANSansWeb_Bold.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Hacen";
+    src: url("../fonts/HacenSaudiArabiaXL.eot");
+    src: url("../fonts/HacenSaudiArabiaXL.eot?#iefix")
+            format("embedded-opentype"),
+        url("../fonts/HacenSaudiArabiaXL.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
