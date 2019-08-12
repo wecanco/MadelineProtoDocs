@@ -13,13 +13,13 @@ image: https://docs.madelineproto.xyz/favicons/android-chrome-256x256.png
 
 ## درباره کتابخانه MadelineProto (میدلاین پروتو)
 
-This library can be used to easily interact with Telegram **without** the bot API, just like the official apps.
+این کتابخانه می تواند برای ارتباط آسان با تلگرام **و بدون** API ربات، درست مثل برنامه های رسمی تلگرام، استفاده شود.
 
-It can login with a phone number (MTProto API), or with a bot token (MTProto API, **no bot API involved!**).
+می تواند با یک شماره تلفن (MTProto API) ، یا با توکن ربات وارد شوید (با استفاده از MTProto API ، **از API ربات استفاده نمی شود**).
 
-[It is now fully async](https://docs.madelineproto.xyz/docs/ASYNC.html)!
+[و هم اکنون پردازش هم زمان (async) کاملا پیاده سازی شده است.](https://docs.madelineproto.xyz/docs/ASYNC.html)!
 
-## Getting started ([now fully async!](https://docs.madelineproto.xyz/docs/ASYNC.html))
+## یک شروع خوب ([پردازش همزمان](https://docs.madelineproto.xyz/docs/ASYNC.html))
 
 ```php
 <?php
@@ -30,7 +30,7 @@ if (!file_exists('madeline.php')) {
 include 'madeline.php';
 
 $MadelineProto = new \danog\MadelineProto\API('session.madeline');
-$MadelineProto->async(true);
+$MadelineProto->async(true); # فعالسازی قابلیت پردازش همزمان آپدیت های دریافتی
 $MadelineProto->loop(function () use ($MadelineProto) {
     yield $MadelineProto->start();
 
@@ -57,16 +57,16 @@ $MadelineProto->loop(function () use ($MadelineProto) {
 [Try this code now!](https://try.madelineproto.xyz) or run this code in a browser or in a console. 
 
 
-Tip: if you receive an error (or nothing), [send us](https://t.me/pwrtelegramgroup) the error message and the `MadelineProto.log` file that was created in the same directory (if running from a browser).  
+نکته: اگر خطایی مشاهده کردید (یا هرچیز دیگری), برای ما خطا را همراه با فایل `MadelineProto.log` (این فایل در پوشه ای که کدتان را اجرا میکنید ساخته می شود البته اگر با مرورگر فایل سورستان را اجرا کرده باشید) [ارسال کنید](https://t.me/pwrtelegramgroup) 
 
-## Documentation
+## راهنما
 
-* [Async](https://docs.madelineproto.xyz/docs/ASYNC.html)
-  * [Usage](https://docs.madelineproto.xyz/docs/ASYNC.html#usage)
-    * [Enabling the MadelineProto async API](https://docs.madelineproto.xyz/docs/ASYNC.html#enabling-the-madelineproto-async-api)
-    * [Using the MadelineProto async API](https://docs.madelineproto.xyz/docs/ASYNC.html#using-the-madelineproto-async-api)
-      * [Async in event handler](https://docs.madelineproto.xyz/docs/ASYNC.html#async-in-event-handler)
-      * [Async in callback handler](https://docs.madelineproto.xyz/docs/ASYNC.html#async-in-callback-handler)
+* [همزمانی](https://docs.madelineproto.xyz/docs/ASYNC.html)
+  * [طریقه استفاده](https://docs.madelineproto.xyz/docs/ASYNC.html#usage)
+    * [فعالسازی API همزمانی](https://docs.madelineproto.xyz/docs/ASYNC.html#enabling-the-madelineproto-async-api)
+    * [استفاده از API همزمانی](https://docs.madelineproto.xyz/docs/ASYNC.html#using-the-madelineproto-async-api)
+      * [همزمانی در کنترل کننده event](https://docs.madelineproto.xyz/docs/ASYNC.html#async-in-event-handler)
+      * [همزمانی در کنترل کننده callback](https://docs.madelineproto.xyz/docs/ASYNC.html#async-in-callback-handler)
       * [Wrapped async](https://docs.madelineproto.xyz/docs/ASYNC.html#wrapped-async)
       * [Multiple async](https://docs.madelineproto.xyz/docs/ASYNC.html#multiple-async)
       * [ArrayAccess async](https://docs.madelineproto.xyz/docs/ASYNC.html#arrayaccess-async)
