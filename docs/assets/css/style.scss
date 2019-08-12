@@ -33,12 +33,10 @@
         url("../fonts/IRANSansWeb_Bold.woff") format("woff"),
         url("../fonts/IRANSansWeb_Bold.ttf") format("truetype");
 }
-@font-face {
-    font-family: "Hacen";
-    src: url("../fonts/HacenSaudiArabiaXL.eot");
-    src: url("../fonts/HacenSaudiArabiaXL.eot?#iefix")
-            format("embedded-opentype"),
-        url("../fonts/HacenSaudiArabiaXL.ttf") format("truetype");
-    font-weight: normal;
-    font-style: normal;
+
+
+body {
+    font-family: "iransansLight";
+    min-height: 100vh;
+    direction: rtl;
 }
