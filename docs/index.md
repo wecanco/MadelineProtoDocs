@@ -1,17 +1,17 @@
 ---
-title: MadelineProto documentation
-description: PHP client/server for the telegram MTProto protocol (a better tg-cli)
+title: راهنمای استفاده از کتابخانه MadelineProto
+description: کتابخانه سمت کلاینت و سرور به زبان PHP برای پروتکل MTProto تلگرام (بهتر از کتابخانه tg-cli)
 image: https://docs.madelineproto.xyz/favicons/android-chrome-256x256.png
 ---
-# MadelineProto, a PHP MTProto telegram client
+# MadelineProto یک کلاینت مبتنی بر MTProto برای تلگرام به زبان PHP
 
-Created by <a href="https://daniil.it" target="_blank" rel="noopener">Daniil Gentili</a>
+ساخته شده توسط <a href="https://daniil.it" target="_blank" rel="noopener">Daniil Gentili (دنیل جنتیلی)</a>
 
-Do join the official channel, [@MadelineProto](https://t.me/MadelineProto) and the [support groups](https://t.me/pwrtelegramgroup)!
+در کانال رسمی [@MadelineProto](https://t.me/MadelineProto) و [گروه پشتیبانی](https://t.me/pwrtelegramgroup) عضو شوید.
 
-<a href="https://telegram.org/apps" target="_blank" rel="noopener">Approved by Telegram!</a>
+<a href="https://telegram.org/apps" target="_blank" rel="noopener">تایید شده توسط تلگرام!</a>
 
-## What's this?
+## درباره کتابخانه MadelineProto (میدلاین پروتو)
 
 This library can be used to easily interact with Telegram **without** the bot API, just like the official apps.
 
