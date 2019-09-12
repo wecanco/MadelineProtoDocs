@@ -251,26 +251,26 @@ $result = blocking_function();
 
 ## API  های میدلاین پروتو و AMPHP
 
-MadelineProto and AMPHP both provide a lot of async functions: all of MadelineProto's functions are async, for example; and AMPHP provides [multiple packages](https://amphp.org/packages) to work asynchronously with HTTP requests, websockets, databases (MySQL, redis, postgres, DNS, sockets and [much more](https://github.com/amphp/)!  
-When using AMPHP libraries, you just have to use them with yield, no need to start the event loop, as long as you're running the functions inside MadelineProto's update handler/loop.  
+MadelineProto و AMPHP هر دو توابع زیادی از همزمانی ارائه می دهند: تمامی توابع MadelineProto از نوع همزمانی است,برای مثال; و همه ی توابع [AMPHP چندین بسته](https://amphp.org/packages) را فراهم می کند تا همزمانی کار کند با درخواست های HTTP ,صحفات وب,  بانک اطلاعات یا پایگاه داده)MySQL,redis,postgres,DNS,sockets  و بیشتر و [بیشتر](https://github.com/amphp/)(!
 
-Also, you should read the AMPHP docs, especially the [event loop docs](https://amphp.org/amp/event-loop/api): AMPHP provides multiple helper methods for executing actions repeatedly every N seconds in a non-blocking manner, or to defer execution of certain actions (aka async cron).  
+وقتی کتابخانه های AMPHP را استفاده می کنید,برای اینکه از آن استفاده کنید باید حتما از yield استفاده کنید, نیازی نیست به شروع رویداد حلقه,مادامی که شما توابه را در قسمت کنترل/حلقه بروزرسانی MadelineProto انجام می دهید.
+همچنین, شما باید مستندات AMPHP را بخوانید,به [خصوص مستندات](https://amphp.org/amp/event-loop/api) رویداد حلقه: AMPHP چندین روش کمکی برای اجرای عمل و اقدامات تکراری و مکرر N  ثانیه در غیر مسدود سازی کردن, یا به تعویق انداختن اجرا برای عملقطعی و مسلم(با نام مستعار cron).
 
-### Helper methods
+### روش های کمک کننده
 
-MadelineProto also provides a few generic async helper methods: when possible, always use MadelineProto's wrapped versions of the [amphp combinators](https://amphp.org/amp/promises/combinators) and [amphp helpers](https://amphp.org/amp/promises/miscellaneous) instead of original amphp methods (`all`, `any`, `some`, `first`, ...).  
+MadelineProto همچنین چندین روش برای متد و روش های کمکی همزمانی ارائه کرده است:اگر امکان داشت,همیشه استفاده کنید از نسخه های پیچیده و بسته بندی شده ی [ترکیبات amphp](https://amphp.org/amp/promises/combinators) و [یاور amphp](https://amphp.org/amp/promises/miscellaneous) از متد و روش های اصل آن(همه, هرکدام,برخی,اولی, ...).
 
-#### Async sleep (does not block the main thread)
+#### همزمانی(موضوع اصلی را مسدود نمی کند)
 ```php
 yield $MadelineProto->sleep(3);
 ```
 
-#### Async readline (does not block the main thread)
+#### همزمانی (موضوع اصلی را مسدود نمی کند(
 ```php
 $res = yield $MadelineProto->readLine('Optional prompt');
 ```
 
-#### Async echo (does not block the main thread)
+#### همزمانی ) موضوع اصلی را مسدود نمی کند(
 ```php
 yield $MadelineProto->echo('Hello'.PHP_EOL);
 ```
