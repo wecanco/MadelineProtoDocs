@@ -1,40 +1,41 @@
 ---
-title: Async
-description: MadelineProto now features async, for **incredible speed improvements**, and parallel processing.  
+title: همزمانی
+description: اکنون میدلاین پروتو برای پیشرفت سرعت باورنکردنی و پردازشرموازی امکانات از همزمانی بهره می برد.  
 image: https://docs.madelineproto.xyz/favicons/android-chrome-256x256.png
 ---
-# Async
+# همزمانی
 
-MadelineProto now features async, for **incredible speed improvements**, and parallel processing.  
-Powered by [amphp](https://amphp.org), MadelineProto wraps the AMPHP APIs to provide a simpler generator-based async API.  
+اکنون میدلاین پروتو برای پیشرفت سرعت باورنکردنی و پردازشرموازی امکانات از همزمانی بهره می برد.
+ 
+با کمک [amphp](https://amphp.org), میدلاین پروتو API های AMPHP را بسته بندی و پیچیده می کند تا یک API  همزمانی مبتنی بر یک |ژنراتور ساده تر ارائه دهد.
 
-* [Usage](#usage)
-  * [Enabling the MadelineProto async API](#enabling-the-madelineproto-async-api)
-  * [Using the MadelineProto async API](#using-the-madelineproto-async-api)
-    * [Async in event handler](#async-in-event-handler)
-    * [Async in callback handler](#async-in-callback-handler)
-    * [Wrapped async](#wrapped-async)
-    * [Multiple async](#multiple-async)
-    * [ArrayAccess async](#arrayaccess-async)
-    * [Ignored async](#ignored-async)
-    * [Blocking async](#blocking-async)
-  * [MadelineProto and AMPHP async APIs](#madelineproto-and-amphp-async-apis)
-    * [Helper methods](#helper-methods)
-      * [Async sleep](#async-sleep-does-not-block-the-main-thread)
-      * [Async readline](#async-readline-does-not-block-the-main-thread)
-      * [Async echo](#async-echo-does-not-block-the-main-thread)
-      * [MadelineProto artax HTTP client](#madelineproto-artax-http-client)
-      * [Async forking](#async-forking-does-green-thread-forking)
-      * [Async flock](#async-flock)
-      * [Combining async operations](#combining-async-operations)
-    * [MadelineProto async loop APIs](#async-loop-apis)
-      * [Loop](#loop)
-      * [ResumableLoop](#resumableloop)
-      * [SignalLoop](#signalloop)
-      * [ResumableSignalLoop](#resumablesignalloop)
-      * [GenericLoop](#genericloop)
+* [استفاده](#usage)
+  * [فعال سازی API همزمانی میدلاین پروتو](#enabling-the-madelineproto-async-api)
+  * [استفاده از API  همزمانی میدلاین پروتو](#using-the-madelineproto-async-api)
+    * [همزمانی در کنترل رویداد](#async-in-event-handler)
+    * [کنترل پاسخ به تماس همزمانی](#async-in-callback-handler)
+    * [همزمانی پیچیده و بسته بندی شده](#wrapped-async)
+    * [همزمانی چندگانه](#multiple-async)
+    * [دسترسی به آرایه با همزمانی](#arrayaccess-async)
+    * [نادیده گرفتن همزمانی](#ignored-async)
+    * [مسدود سازی هزمانی](#blocking-async)
+  * [API  های میدلاین پروتو و AMPHP](#madelineproto-and-amphp-async-apis)
+    * [روش های کمک کننده](#helper-methods)
+      * [خوابیدن همزمانی](#async-sleep-does-not-block-the-main-thread)
+      * [خواندن خط همزمانی](#async-readline-does-not-block-the-main-thread)
+      * [پژواک همزمانی](#async-echo-does-not-block-the-main-thread)
+      * [artax میدلاین پروتو برای کلاینت HTTP](#madelineproto-artax-http-client)
+      * [همزمانی forking](#async-forking-does-green-thread-forking)
+      * [همزمانی  flock](#async-flock)
+      * [ترکیب عملیات همزمانی](#combining-async-operations)
+    * [API های حلقه ی همزمانی میدلاین پروتو](#async-loop-apis)
+      * [حلقه](#loop)
+      * [از سرگیری حلقه](#resumableloop)
+      * [سیگنال حلقه](#signalloop)
+      * [از سرگیری سیگنال حلقه](#resumablesignalloop)
+      * [حلقه ی عمومی](#genericloop)
 
-## Usage
+## استفاده
 
 What exactly __is__ **async**, you may ask, and how is it better than **threading** or **multiprocessing**?  
 Async is a relatively new programming pattern that allows you to easily write **non-blocking** code **as if you were using standard** blocking functions, all **without** the need for complex message exchange systems and synchronization handling for threaded programs, that only add overhead and complexity to your programs, making everything slower and error-prone.  
