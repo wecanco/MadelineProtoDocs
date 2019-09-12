@@ -37,54 +37,53 @@ image: https://docs.madelineproto.xyz/favicons/android-chrome-256x256.png
 
 ## استفاده
 
-What exactly __is__ **async**, you may ask, and how is it better than **threading** or **multiprocessing**?  
-Async is a relatively new programming pattern that allows you to easily write **non-blocking** code **as if you were using standard** blocking functions, all **without** the need for complex message exchange systems and synchronization handling for threaded programs, that only add overhead and complexity to your programs, making everything slower and error-prone.  
+شاید سوال کنید که دقیقا همزمانی چیست,و چگونه بهتر از threading  یا multiprocessing?
+همزمانی یک الگوی برنامه نویسی جدید است که به شما اجازه می دهد به راحتی کد های مسدود کننده را بنویسید طوری که از توابع مسدود کننده ی استاندارد استفاده میکنید, همه ی این ها بدون نیاز به سیستم های پیچیده ی تبادل پیام و کار با هماهنگ سازی کنترل برای برنامه های رشته ای, چیزی جز اضافه کردن سرباری و پیچیدگی به برنامه های شما ندارد و همه چیز را کندتر و مواجه با خطا می کند.
+شاید شما با خود فکر کنید که خیلی باحال و همه چیز خوب است, اما این همزمانی چطور کار می کند؟ خب, چیزی که به نظر می آید بسیار آسان است.
+به جای اینکه این کد را بنویسید:
 
-That's very cool and all, you might think, but how exactly does this __async__ stuff work? Well, as it turns out, it's very easy.  
-
-Instead of writing code like this:  
 ```php
 $file = $MadelineProto->download_to_dir($bigfile, '/tmp/');
 ```
 
-Write it like **this**:  
+می توانید اینجور بنویسید: 
 ```php
 $file = yield $MadelineProto->download_to_dir($bigfile, '/tmp/');
 ```
 
-### That's it.
+### همین است.
 
-It's really **that** easy, you just have to add a `yield` before calling MadelineProto methods.  
-The `yield` will automatically **suspend** the execution of the function, letting the program do other stuff while the file is being downloaded.  
-Once the file is downloaded, execution is automatically **resumed** from that exact point in the function.  
+واقعا راحت است,کافی است فقط شما yield اضافه کنید قبل صدا زدن روش یا متد های MadelineProto.
+Yield به صورت خودکاراجرای عملکرد را به حالت تعلیق در می آورد, اجازه می دهدبه برنامهانجام دهد چیز های دیگری در حالی که فایل بارگیری می شود.
+پس از بارگیری فایل, اجرای آن به صورت خودکار از آن نقطه ی دقیق تابع انجام می شود.
 
-This means that you can handle multiple updates, download/upload multiple files all together in one process, as if you were writing normal synchronous code + making everything a lot faster.  
+این به این معنی است که شما توانایی کنترل چندگانه ی بروزرسانی ها, بارگیری/بارگذاری فایل های چندگانه همه در یک روند, مانند اینکه شما درحال نوشتن کد های همزمان عادی + همه چیز را سریع تر می سازید.
 
-If your code still relies on the old synchronous behaviour, don't worry, there is backward compatibility.  
-However, I highly recommend you switch to async, due to the huge performance and parallelism benefits.  
+اگر کد های شما هنوز روی همزمانی قدیم هست, نگران نباشید چیزی هست که بشودبه عقب بازگشت به صورت کامل. با این حال, من بسیار توصیه می کنم که شما به سمت همزمانی بروید, ناشی از کارایی بزرگ و موازی بودن فواید ها.
 
-**WARNING**: MadelineProto async is not compatible with pthreads or pcntl, so please uninstall pthreads and do not use `pcntl_fork` in your bot.  
+هشدار: همزمانی میدلاین پروتو با pthreads   یا  pcntl, پس لطفا phreads را حذف نصب کنید و از pcntl_fork استفاده نکنید در ربات های خود.
 
-## Enabling the MadelineProto async API
 
-The `yield` operator can only be used within functions, once MadelineProto's async mode is enabled.  
-To do that, simply run the `async` function, or pass the async enabler flag separately to each method call, if you want to make only some calls async.  
+## فعال سازی API همزمانی میدلاین پروتو
 
-This will enable async mode for **all** MadelineProto functions:  
+yield فقط می تواند داخل تابع باشد که حالت همزمانی میدلاین پروتو فعال باشد.
+برای انجام این کار, یا باید تابع همزمانی را فعال کتید, یا اگر میل بعضی از تماس ها را همزمانی کنید,پرچم فعال کننده ی همزمانی را به صورت جداگانه به هر تماس متد و دستور منتقل کنید.
+این کد می تواند تمام تابع های میدلاین پروتو را برای حالت همزمانی فعال کند:
+
 ```php
 $MadelineProto->async(true);
 // ...
 yield $MadelineProto->messages->sendMessage(...);
 ```
 
-This will enable async mode for **only one** specific call of a MadelineProto function (by adding a **new** array parameter after all the required parameters):  
+این کد می تواند حالت همزمانی را فقط برای یک تماس خاص و اختصاصی یک تابع میدلان پروتو را فعال کند( با اضافه کردن یک پارامتر آرایه جدید بعد از اتمام پارامتر های مورد نیاز): 
 ```php
 yield $MadelineProto->messages->sendMessage(..., ['async' => true]);
 ```
 
-## Using the MadelineProto async API
+## استفاده از API  همزمانی میدلاین پروتو
 
-As mentioned earlier, you can only use the `yield` operator within functions, but not just any function, for example (**WILL NOT WORK**):
+همان طور که قبلا گفتیم,شما فقط طوری می توانید اپراتورyield را استفاده کنید که داخل تابع باشد, اما هر تابع ای نه, برای مثال(کار نمی کند):
 ```php
 $sm = function ($chatID, $message) use ($MadelineProto) {
     $id = (yield $MadelineProto->get_info($chatID, ['async' => true]))['bot_api_id'];
@@ -94,13 +93,13 @@ $sm = function ($chatID, $message) use ($MadelineProto) {
 $result = $sm('@danogentili', 'hi');
 ```
 
-This **will not work**, because the result of a function that uses `yield` is not the `return`ed value, but a [generator](https://www.php.net/manual/en/language.generators.overview.php), which is what the async AMPHP API is based on.  
-If the generator is not __passed to the AMPHP event loop__, execution of the function will not be resumed: when MadelineProto asynchronously obtains the result of the get_info, execution of the function is never resumed, and the line with sendMessage is never called.  
-To avoid this problem, only call asynchronous functions in the event/callback update handler, or in functions called by the event/callback update handler, or inside a function passed to loop.  
-You can also call asynchronous functions created by you, within other asynchronous functions.  
-Generators in MadelineProto are equivalent to promises, which is a paradigm you may have used in other languages.
+این کار نخواهد کرد, زیرا نتیجه ی تابعکه از yield استفاده می کند,مقدار بازگشتی نیست,بلکه یک [generator](https://www.php.net/manual/en/language.generators.overview.php) است,این همان چیزی است که async AMPHP API بر اساس آن است. اگر [generator](https://www.php.net/manual/en/language.generators.overview.php) از رویداد حلقه ی AMPHP گذشت نکند,اجرای تابع ادامه پیدا نخواهد کرد. وقتی میدلاین پروتو به طور همزمانی نتیجه ی get_info را بدست می آورد,اجرای تابع هرگز از سر گرفته نمی شود, و خط sendMessage هرگز فراخوانی نمی شود.
+برای اجتناب کردن این مشکل, فقط تماس داشته باشید با تابع همزمانی در رویداد/پاسخ به بروزرسانی کنترل کننده, یا داخل تابع ای که تماس داشته اید توسط رویداد/پاسخ به بروزرسانی کنترل کننده, یاداخل تابع ای که از حلقه گذشت کند.
+شما می توانید تماس داشته باشید با تابع همزمانی که خود شما ساخته اید,همراه با تابع های همزمانی دیگر.
+[generator](https://www.php.net/manual/en/language.generators.overview.php) ها در میدلاین پروتو معادل وعده ها هستند,که الگویی هستند در که احتمالا در سایر زبان ها استفاده کرده اید.
 
-### Async in [event handler](https://docs.madelineproto.xyz/docs/UPDATES.html#event-driven):
+
+### همزمانی در [کنترل رویداد](https://docs.madelineproto.xyz/docs/UPDATES.html#event-driven):
 ```php
 $MadelineProto->async(true);
 class EventHandler extends \danog\MadelineProto\EventHandler
@@ -134,7 +133,7 @@ class EventHandler extends \danog\MadelineProto\EventHandler
 }
 ```
 
-### Async in [callback handler](https://docs.madelineproto.xyz/docs/UPDATES.html#callback):
+### همزمانی در [callback handler](https://docs.madelineproto.xyz/docs/UPDATES.html#callback):
 ```php
 $MadelineProto->async(true);
 $MadelineProto->setCallback(function ($update) use ($MadelineProto) {
@@ -146,7 +145,7 @@ $MadelineProto->setCallback(function ($update) use ($MadelineProto) {
 });
 ```
 
-### Wrapped async
+### همزمانی پیچیده و بسته بندی شده
 ```php
 $MadelineProto->async(true);
 $MadelineProto->loop(function () use ($MadelineProto) {
@@ -155,19 +154,17 @@ $MadelineProto->loop(function () use ($MadelineProto) {
 });
 ```
 
-You can pass a promise or an async function to the loop function, and it will block until it is resolved.  
+شما می توانید یک قول را با یک تابع همزمانی را به تابع ی حلقه دار منتقل کنید,و مسدود می شود تا زمانی که حل شود.
 
-### Ignored async
+### نادیده گرفتن همزمانی
 ```php
 $MadelineProto->messages->sendMessage(['peer' => '@danogentili', 'message' => 'a'], ['async' => true]);
 $MadelineProto->messages->sendMessage(['peer' => '@danogentili', 'message' => 'b'], ['async' => true]);
 ```
+شما می توانید از توابع نسخه ی async میدلاین پروتو استفاده کنید بدون  yield اگر شما درخواست نمی کنید برای مسدود سازی, و شما نیاز ندارید به نتیجه ی تابع.
+این مجاز است, اما ترتیب تماس ها و صدا زدن های تابع تضمین نمی شود: اگر می خواهید مطمئن شوید که ترتیب تماس ها و صدا زدن ها یکسان است, می توانید از [صف تماس ها](https://docs.madelineproto.xyz/docs/USING_METHODS.html#queues) استفاده کنید. نگاهی کنید به [async forking](#async-forking-does-async-green-thread-forking).
 
-You can use the async version of MadelineProto functions **without** yield if you don't want the request to block, and you don't need the result of the function.  
-This is allowed, but the order of the function calls will not be guaranteed: you can use [call queues](https://docs.madelineproto.xyz/docs/USING_METHODS.html#queues) if you want to make sure the order of the calls remains the same.
-See [async forking](#async-forking-does-async-green-thread-forking).  
-
-### Multiple async
+### همزمانی چندگانه
 ```php
 yield $MadelineProto->messages->sendMessage([
     'multiple' => true,
@@ -176,43 +173,47 @@ yield $MadelineProto->messages->sendMessage([
 ]);
 ```
 
-This is the preferred way of combining multiple method calls: this way, the MadelineProto async WriteLoop will combine all method calls in one container, making everything WAY faster.  
-The result of this will be an array of results, whose type is determined by the original return type of the method (see [API docs](https://docs.madelineproto.xyz/API_docs)).  
+این روش ترجیحی برای ترکیب چندین تماس و صدا زدن و فراخوانی به روش : از راه MadelineProto async WriteLoop تمام تماس و صدا زدن های متد را در یک ظرف ترکیب می کند و همه چیز را سریع تر می کند.
+نتیجه این شاید باشد آرایه ای از نتیجه ها خواهد بود, که نوع آن با نوع روش بازگشت اصلی مشخص می شود) نگاهی کنید به [API docs](https://docs.madelineproto.xyz/API_docs) ).
+ترتیب تماس ها و صدا زدن متد ها را می توان با استفاده از [صف تماس](USING_METHODS.html#queues),تضمین کرد)سمت سرور, نه توسط MadelineProto).
 
-The order of method calls can be guaranteed (server-side, not by MadelineProto) by using [call queues](USING_METHODS.html#queues).
 
-### ArrayAccess async
+### دسترسی به آرایه با همزمانی
 
-You can do async ArrayAccess on promises.  
+شما می توانید دسترسی به آرایه را بر روی وعده انجام دهید.
 
-Now instead of doing this:  
+اکنون به جای اینکه این کار را کنید:  
 ```php
 $id = (yield $MadelineProto->getPwrChat('danogentili'))['bot_api_id'];
 ```
 
-You can simply do this:  
+شما می توانید به سادگی این کار را انجام دهید:
 ```php
 $id = yield $MadelineProto->getPwrChat('danogentili')['bot_api_id'];
 ```
 
-Setting attributes asynchronously is also supported (it's kind of useless, but it's useful if you have some custom logic, like for example a method that returns a custom ArrayAccess class with a set method that does something magical).  
+تنظیم ویژگی ها به طور همزمانی نیز پشتیبانی می شود)این یک نوع بی فایده و سود است اما اگر سفارش شما منطقی باشد, مثلا وقتی روشی که یک کلاس دسترسی به آرایه سفارشی را با یک روش مجموعه ای انجام می دهد که کاری جادویی انجام می دهد, مفید است.(
+
 ```php
 $Id = yield $MadelineProto->getPwrChat('danogentili')['bot_api_id'] = 'pony';
 ```
 
-isset and unset aren't supported due to the fact that in PHP, isset and unset aren't proper functions but language constructs (logically).  
-You have to do this, instead:  
+صدور و تنظیم نشده پشتیبانی نمی شوند به دلیل این واقعیت که در PHP, صدور و تنظیم نشدن عملکرد های مناسبی نیستند بلکه ساختار های زبانی هستند) منطقی(.
+شما باید این کار را انجام دهید در عوض:
+ 
 ```php
 $set = isset((yield $MadelineProto->getPwrChat('danogentili'))['bot_api_id']);
 ```
 
-or  
+یا
+
 ```php
 $result = yield $MadelineProto->getPwrChat('danogentili');
 $set = isset($result['bot_api_id']);
 ```
 
-Also, `ArrayAccess` on raw generators still isn't supported unless you wrap them in a coroutine using `$MadelineProto->call`:  
+درواقع, دسترسی به آرایه روی ژنراتورهای خام هنوز پشتیبانی نمی شود جز اینکه آن ها را با استفاده از صدا زدن $MadelineProto->call در یک کوروتین ببندید:
+
 ```php
 public function ponyAsync()
 {
@@ -239,16 +240,16 @@ $set = yield $this->pony()['id'];
 ```
 
 
-### Blocking async
+### مسدود سازی همزمانی
 ```php
 $result = blocking_function();
 ```
 
-Sometimes, you have to call non-async functions in your code: that is allowed in async MadelineProto, you just have to call your functions normally without `yield`.  
-However, you shouldn't do (or need to do) this, because this renders async completely useless.  
-AMPHP and MadelineProto already provide async versions of curl, `file_get_contents`, MySQL, redis, postgres, and many more native PHP functions: 
+بعضی وقت ها, شما باید تابع ی غیر همزمانی را صدا بزنید در کد های خود: این مجاز است در همزمانی MadelineProto, شما باید تابع خود را به صورت عادی بدون yield صدا بزنید. با این حال, شما نباید این عمل را نجام دهید( یا باید انجام دهید), زیرا این امر باعث می شود که همزمانی کاملا بی فایده باشد.
+درحال حاضر AMPHP و MadelineProto, نسخه ی همزمانی curl,file_get_contents,MySQL,redis,postgres, و بسیاری از توابع بومی PHPارائه می دهند:
 
-## MadelineProto and AMPHP async APIs
+
+## API  های میدلاین پروتو و AMPHP
 
 MadelineProto and AMPHP both provide a lot of async functions: all of MadelineProto's functions are async, for example; and AMPHP provides [multiple packages](https://amphp.org/packages) to work asynchronously with HTTP requests, websockets, databases (MySQL, redis, postgres, DNS, sockets and [much more](https://github.com/amphp/)!  
 When using AMPHP libraries, you just have to use them with yield, no need to start the event loop, as long as you're running the functions inside MadelineProto's update handler/loop.  
