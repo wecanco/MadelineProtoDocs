@@ -7,7 +7,7 @@ image: https://docs.madelineproto.xyz/favicons/android-chrome-256x256.png
 
 اکنون میدلاین پروتو برای پیشرفت سرعت باورنکردنی و پردازشرموازی امکانات از همزمانی بهره می برد.
  
-با کمک [amphp](https://amphp.org), میدلاین پروتو API های AMPHP را بسته بندی و پیچیده می کند تا یک API  همزمانی مبتنی بر یک |ژنراتور ساده تر ارائه دهد.
+با کمک [amphp](https://amphp.org), میدلاین پروتو API های AMPHP را بسته بندی و پیچیده می کند تا یک API  همزمانی مبتنی بر یک ژنراتور ساده تر ارائه دهد.
 
 * [استفاده](#usage)
   * [فعال سازی API همزمانی میدلاین پروتو](#enabling-the-madelineproto-async-api)
